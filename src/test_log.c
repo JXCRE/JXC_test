@@ -15,17 +15,17 @@ static pthread_t thread2;
 static void *thread1_fun(void *para)
 {
     for(int i=0; i<1000; i++){
-        jxc_log_write("i am t1 %d",i);
+        jxc_log_write("i am t1 %d\n",i);
     }
-    jxc_log_write("i am t1 done");
+    jxc_log_write("i am t1 done\n");
 }
 
 static void *thread2_fun(void *para)
 {
     for(int i=0; i<1000; i++){
-        jxc_log_write("i am t2 %d",i);
+        jxc_log_write("i am t2 %d\n",i);
     }
-    jxc_log_write("i am t2 done");
+    jxc_log_write("i am t2 done\n");
 }
 
 void test_jxc_log(void)

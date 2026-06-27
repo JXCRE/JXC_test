@@ -19,8 +19,10 @@ typedef enum{
     jxcStatusLogFileNull        = -12,      //file不存在
     jxcStatusLogFileOpenErr     = -13,      //file打开失败
 
+    jxcStatusTcpServerAbnormal  = -21,      //tcp服务器异常/连接断开
+    jxcStatusTcpClientAbnormal  = -22,      //tcp客户端异常/连接断开
+
 }jxc_status;
 
 
 #endif
-

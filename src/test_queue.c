@@ -49,8 +49,8 @@ static void *thread2_fun(void *para)
             static int i=0;
             static double time=0;
             if(i%1000 == 0){
-                printf("queue downSample1000 i=%d num=%d fix=%d cur queue size is %d els time %f\n",
-                        i,s.num,s.fix,jxc_queue_get_cur_num(handle),(jxc_get_ms() - time));
+                // printf("queue downSample1000 i=%d num=%d fix=%d cur queue size is %d els time %f\n",
+                //         i,s.num,s.fix,jxc_queue_get_cur_num(handle),(jxc_get_ms() - time));
                 time = jxc_get_ms();
             }
             i++;

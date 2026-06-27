@@ -41,7 +41,7 @@ static void *thread_fifo_r_fun(void *para)
                 }
                 expect++;
             }else{
-                printf("jxc_fifo wirte timeout\n");
+                printf("jxc_fifo read timeout\n");
             }
         }
     }
