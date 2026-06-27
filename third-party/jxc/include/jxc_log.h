@@ -1,11 +1,22 @@
 #ifndef __JXC_LOG_H
 #define __JXC_LOG_H
 
+/**
+ * LOG:
+ *  提供日志打印宏及日志文件功能
+ * SUGGESTION:
+ *  日志覆盖式写入
+ *  多线程使用时，不建议在使用过程中destory
+ * DEFECT:
+ *  高频写日志，会出现锁竞争及IO阻塞
+ */
+
 #include <stdio.h>
 #include "jxc_type.h"
 
 //----------全局开关(注释掉可禁用所有日志)----------
 #define ENABLE_PRINTF
+#define ENABLE_LOG_WRITE    1
 
 //----------各等级日志开关(可分别控制)----------
 #define ENABLE_LOG_DEBUG    1

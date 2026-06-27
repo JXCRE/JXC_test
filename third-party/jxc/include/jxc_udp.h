@@ -2,8 +2,13 @@
 #define __JXC_UDP_H
 
 /**
- * 默认IPV4 UDP
- * 未实现线程保护!!!
+ * UDP:
+ *  支持单播收发，组播收发
+ * SUGGESTION:
+ *  
+ * DEFECT:
+ *  不支持多线程使用
+ * 
 */
 
 #include <stdint.h>
@@ -23,7 +28,7 @@ typedef struct{
 extern "C" {
 #endif
 
-jxc_udp_handle jxc_udp_creat(jxc_udp_cfg_t *cfg);
+jxc_udp_handle jxc_udp_create(jxc_udp_cfg_t *cfg);
 void jxc_udp_destroy(jxc_udp_handle handle);
 int jxc_udp_send(jxc_udp_handle handle, char *dst_ip, uint16_t dst_port, uint8_t *data, uint32_t len);
 int jxc_udp_recv(jxc_udp_handle handle, uint8_t *buf, uint32_t buf_len, char *src_ip, uint16_t *src_port);

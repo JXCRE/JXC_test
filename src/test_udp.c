@@ -22,16 +22,16 @@ jxc_udp_handle  udp_hndl = NULL;
 jxc_udp_handle  udp_groupS_hndl = NULL;
 jxc_udp_handle  udp_groupR_hndl = NULL;
 //UDP 单播
-#define UDP_LOCAL_IP        "192.168.10.128"
+#define UDP_LOCAL_IP        "192.168.31.68"
 #define UDP_LOCAL_PORT      19990
 //UDP 组播发
 #define UDP_GROUPS_IP       "226.0.0.1"
 #define UDP_GROUPS_PORT     12345
-#define UDP_GROUPS_NET_CARD "192.168.10.128"
+#define UDP_GROUPS_NET_CARD "192.168.31.68"
 //UDP 组播收
 #define UDP_GROUPR_IP       "239.0.0.1"
 #define UDP_GROUPR_PORT     12346
-#define UDP_GROUPR_NET_CARD "192.168.3.11"
+#define UDP_GROUPR_NET_CARD "192.168.31.68"
 
 static void *thread_udp_fun(void *para)
 {
@@ -45,7 +45,7 @@ static void *thread_udp_fun(void *para)
             printf("udp recv: %s\n",data);
         }else{
             // printf("udp recv timeout\n");
-            jxc_udp_send(udp_hndl, "192.168.10.128", 19991, "i am 19990\n", sizeof("i am 19990\n"));
+            jxc_udp_send(udp_hndl, "192.168.31.144", 19991, "i am 19990\n", sizeof("i am 19990\n"));
         }
     }
     
@@ -68,8 +68,8 @@ static void *thread_udp_groupR_fun(void *para)
     while(is_running)
     {
         if(jxc_udp_recv(udp_groupR_hndl, data, sizeof(data), ip, &port) > 0){
-            printf("udp recv from %s:%d\n",ip,port);
-            printf("udp recv: %s\n",data);
+            printf("udp group recv from %s:%d\n",ip,port);
+            printf("udp group recv: %s\n",data);
         }else{
             // printf("udp group recv timeout\n");
         }
@@ -91,7 +91,7 @@ void test_jxc_udp(void)
     cfg.mcast_group = NULL;
     cfg.iface_ip = NULL;
     cfg.recv_timeout_ms = 2000;
-    udp_hndl = jxc_udp_creat(&cfg);
+    udp_hndl = jxc_udp_create(&cfg);
     if(!udp_hndl){
         printf("udp send/recv err\n");
     }
@@ -104,7 +104,7 @@ void test_jxc_udp(void)
     cfg.mcast_group = NULL;
     cfg.iface_ip = NULL;
     cfg.recv_timeout_ms = -1;
-    udp_groupS_hndl = jxc_udp_creat(&cfg);
+    udp_groupS_hndl = jxc_udp_create(&cfg);
     if(!udp_groupS_hndl){
         printf("udp group send err\n");
     }
@@ -118,7 +118,7 @@ void test_jxc_udp(void)
     cfg.mcast_group = UDP_GROUPR_IP;
     cfg.iface_ip = UDP_GROUPR_NET_CARD;
     cfg.recv_timeout_ms = 2000;
-    udp_groupR_hndl = jxc_udp_creat(&cfg);
+    udp_groupR_hndl = jxc_udp_create(&cfg);
     if(!udp_groupR_hndl){
         printf("udp group recv err\n");
     }

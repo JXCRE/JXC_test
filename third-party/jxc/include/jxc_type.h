@@ -16,7 +16,8 @@ typedef enum{
     jxcStatusTimeout            = -3,       //超时
 
     jxcStatusLogFileExist       = -11,      //file存在
-    jxcStatusLogFileOpenErr     = -12,      //file打开失败
+    jxcStatusLogFileNull        = -12,      //file不存在
+    jxcStatusLogFileOpenErr     = -13,      //file打开失败
 
 }jxc_status;
 

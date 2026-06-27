@@ -2,8 +2,14 @@
 #define __JXC_QUEUE_H
 
 /**
- * QUEUE 线程保护
- * 不建议在出队入队时destory
+ * QUEUE:
+ *  
+ * SUGGESTION:
+ *  多线程使用时，不建议在使用过程中destory
+ * DEFECT:
+ *  读写被虚假唤醒后，且条件不满足，会重新计算超时时间，会导致总等待时间会超过设定的等待时间
+ *  使用pthread_condattr_setclock，可能在某些精简的平台不适配
+ * 
 */
 
 #include <stdint.h>
@@ -16,7 +22,7 @@ extern "C" {
 #endif
 
 jxc_queue_handle jxc_queue_create(uint32_t max_num, uint32_t elem_size);
-void jxc_queue_destroy(jxc_queue_handle handle);
+void jxc_queue_destroy(jxc_queue_handle *handle);
 jxc_status jxc_queue_enqueue(jxc_queue_handle handle, uint8_t *data, int timeout_ms);
 jxc_status jxc_queue_dequeue(jxc_queue_handle handle, uint8_t *data, int timeout_ms);
 jxc_status jxc_queue_get_latest(jxc_queue_handle handle, uint8_t *data, int timeout_ms);
@@ -29,4 +35,3 @@ void jxc_queue_clear(jxc_queue_handle handle);
 
 
 #endif
-
