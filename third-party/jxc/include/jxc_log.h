@@ -16,7 +16,6 @@
 
 //----------全局开关(注释掉可禁用所有日志)----------
 #define ENABLE_PRINTF
-#define ENABLE_LOG_WRITE    1
 
 //----------各等级日志开关(可分别控制)----------
 #define ENABLE_LOG_DEBUG    1

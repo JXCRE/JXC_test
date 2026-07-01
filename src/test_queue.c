@@ -116,7 +116,7 @@ void test_jxc_queue(void)
 void test_jxc_queue_destory(void)
 {
     is_running = false;
-    jxc_queue_destroy(&handle);
+    jxc_queue_destroy(handle);
     pthread_join(thread1, NULL);
     pthread_join(thread2, NULL);
     

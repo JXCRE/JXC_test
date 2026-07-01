@@ -95,6 +95,6 @@ void test_jxc_fifo_destory(void)
     pthread_join(thread1, NULL);
     pthread_join(thread2, NULL);
 
-    jxc_fifo_destroy(&fifo);
+    jxc_fifo_destroy(fifo);
 }
 

@@ -36,9 +36,17 @@ typedef struct{
     uint16_t              server_port;          //客户端连接的服务器端口
     int                   connect_timeout_ms;   //客户端连接超时(-1=阻塞)
     int                   io_timeout_ms;        //收发超时(-1=阻塞)
-    int                   backlog;              //listen backlog(<=0使用默认值)
-    int                   max_clients;          //多客户最大数量(<=0使用默认值)
+    int                   backlog;              //listen backlog(<=0使用默认值16)
+    int                   max_clients;          //多客户最大数量(<=0使用默认值64)
 }jxc_tcp_cfg_t;
+
+/**
+ * tcp客户端:server_ip,server_port必须配置
+ * tcp服务端:local_ip,local_port必须配置
+ * tcp服务端single:新连接会替换旧连接，wait返回的client_id就是当前连接fd
+ * tcp服务端multi:wait返回的client_id就是当前连接fd
+ * backlog,max_clients均可以不填写
+*/
 
 #ifdef __cplusplus
 extern "C" {
@@ -46,13 +54,19 @@ extern "C" {
 
 jxc_tcp_handle jxc_tcp_create(jxc_tcp_cfg_t *cfg);
 void jxc_tcp_destroy(jxc_tcp_handle handle);
+
+//客户端使用的函数
 jxc_status jxc_tcp_connect(jxc_tcp_handle handle);
 jxc_status jxc_tcp_reconnect(jxc_tcp_handle handle, int retry_times, int interval_ms);
-int jxc_tcp_accept(jxc_tcp_handle handle, int timeout_ms);
+
+//服务器使用的函数
 int jxc_tcp_wait(jxc_tcp_handle handle, int *client_id, int timeout_ms);
+jxc_status jxc_tcp_close_client(jxc_tcp_handle handle, int client_id);
+
+//客户端/服务端共用的发送接收函数
 int jxc_tcp_send(jxc_tcp_handle handle, int client_id, uint8_t *data, uint32_t len);
 int jxc_tcp_recv(jxc_tcp_handle handle, int client_id, uint8_t *buf, uint32_t buf_len);
-jxc_status jxc_tcp_close_client(jxc_tcp_handle handle, int client_id);
+
 
 #ifdef __cplusplus
 }

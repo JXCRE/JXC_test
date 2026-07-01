@@ -159,13 +159,13 @@ static void *thread_tcp_serv_multi(void *para)
 
         ret = jxc_tcp_recv(server, id, buf, sizeof(buf));
         if(ret > 0){
-            printf("tcp server single recv %d:%s\n",id,buf);
+            printf("tcp server multi recv %d:%s\n",id,buf);
             jxc_tcp_send(server, id, "server get msg\n", sizeof("server get msg\n"));
         }else{
             if(ret == jxcStatusTcpClientAbnormal){
                 jxc_tcp_close_client(server, id);
             }
-            printf("jxc_tcp_recv server single falied %d\n",ret);
+            printf("jxc_tcp_recv server multi falied %d\n",ret);
 
         }
 

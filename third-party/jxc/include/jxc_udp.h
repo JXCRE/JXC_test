@@ -24,6 +24,12 @@ typedef struct{
     int         recv_timeout_ms;    //接收超时(-1=阻塞)
 }jxc_udp_cfg_t;
 
+/**
+ * udp单播收发:local_ip,local_port必须配置  mcast_group,iface_ip可以为NULL
+ * udp组播发送:local_ip,local_port,mcast_group,iface_ip都可以为NULL，发送时指定目标组播地址即可
+ * udp组播接收:local_port,mcast_group,iface_ip必须配置  local_ip可以为NULL
+*/
+
 #ifdef __cplusplus
 extern "C" {
 #endif
